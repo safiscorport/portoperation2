@@ -51,9 +51,15 @@
             height: 100%; border-radius: 3px;
             background: linear-gradient(90deg, #d97706, #f59e0b, #fbbf24);
         }
+        @keyframes blinkStoppage {
+            0% { opacity: 1; }
+            50% { opacity: 0.15; }
+            100% { opacity: 1; }
+        }
         .stoppage-badge {
             background-color: rgba(239, 68, 68, 0.2); color: #f87171; border: 1px solid #ef4444;
             padding: 2px 6px; border-radius: 3px; font-weight: 700; font-size: 12px; display: inline-block;
+            animation: blinkStoppage 2.5s infinite ease-in-out;
         }
         .normal-remark { color: #34d399; font-weight: 600; font-size: 12px; }
         .footer-container {
@@ -108,7 +114,7 @@
                     <th>Act Time</th>
                 </tr>
             </thead>
-            <tbody>
+            <tbody id="berths-tbody">
                 <tr>
                     <td>Berth 1</td>
                     <td>BARGE JB 5</td>
@@ -277,7 +283,7 @@
             </tbody>
         </table>
 
-        <div class="totals-bar">
+        <div class="totals-bar" id="totals-bar">
             TOTALS &nbsp;|&nbsp; Booking: 295,000 &nbsp;|&nbsp; Dispatch: 139,000 &nbsp;|&nbsp; Loaded: 105,000 &nbsp;|&nbsp; Balance: 190,000 (41%) &nbsp;|&nbsp; Stockpile: 34,000
         </div>
 
@@ -376,28 +382,6 @@
         <div class="footer-card"><b>Stevedores:</b> 43</div>
     </div>
 
-    <script>
-        // Screen toggle rotation script: Screen 1 = 5 mins (300000ms), Screen 2 = 2 mins (120000ms)
-        let currentScreen = 1;
-        const screen1 = document.getElementById('screen-1');
-        const screen2 = document.getElementById('screen-2');
-
-        function rotateScreens() {
-            if (currentScreen === 1) {
-                screen1.classList.remove('active');
-                screen2.classList.add('active');
-                currentScreen = 2;
-                setTimeout(rotateScreens, 120000); // 2 minutes for Screen 2
-            } else {
-                screen2.classList.remove('active');
-                screen1.classList.add('active');
-                currentScreen = 1;
-                setTimeout(rotateScreens, 300000); // 5 minutes for Screen 1
-            }
-        }
-
-        // Initialize timer starting with Screen 1 duration
-        setTimeout(rotateScreens, 300000);
-    </script>
+    <script src="./app.js"></script>
 </body>
 </html>
